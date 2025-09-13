@@ -1,0 +1,10 @@
+# Node
+node_modules/
+npm-debug.log
+
+# dotenv
+.env
+backend/.env
+
+# build
+dist/
