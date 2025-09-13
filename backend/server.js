@@ -1,14 +1,14 @@
 import express from 'express';
 import cors from 'cors';
-import { json } from 'body-parser';
+import bodyParser from 'body-parser';
 import { config } from 'dotenv';
 config();
 
-import invoiceRoutes from './routes/invoices';
+import invoiceRoutes from './routes/invoices.js';
 
 const app = express();
 app.use(cors());
-app.use(json());
+app.use(bodyParser.json());
 
 app.use('/api/invoices', invoiceRoutes);
 
