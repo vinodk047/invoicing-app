@@ -1,14 +1,14 @@
-const express = require('express');
-const cors = require('cors');
-const bodyParser = require('body-parser');
-const dotenv = require('dotenv');
-dotenv.config();
+import express from 'express';
+import cors from 'cors';
+import { json } from 'body-parser';
+import { config } from 'dotenv';
+config();
 
-const invoiceRoutes = require('./routes/invoices');
+import invoiceRoutes from './routes/invoices';
 
 const app = express();
 app.use(cors());
-app.use(bodyParser.json());
+app.use(json());
 
 app.use('/api/invoices', invoiceRoutes);
 

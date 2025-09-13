@@ -1,6 +1,6 @@
-const { CosmosClient } = require('@azure/cosmos');
-const dotenv = require('dotenv');
-dotenv.config();
+import { CosmosClient } from '@azure/cosmos';
+import { config } from 'dotenv';
+config();
 
 const endpoint = process.env.COSMOS_ENDPOINT;
 const key = process.env.COSMOS_KEY;
@@ -19,4 +19,4 @@ async function getContainer() {
   return container;
 }
 
-module.exports = { client, getContainer };
+export default { client, getContainer };

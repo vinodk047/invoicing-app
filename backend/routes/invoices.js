@@ -1,7 +1,7 @@
-const express = require('express');
-const router = express.Router();
-const { getContainer } = require('../services/cosmosClient');
-const { v4: uuidv4 } = require('uuid');
+import { Router } from 'express';
+const router = Router();
+import { getContainer } from '../services/cosmosClient';
+import { v4 as uuidv4 } from 'uuid';
 
 // CREATE
 router.post('/', async (req, res) => {
@@ -72,4 +72,4 @@ router.delete('/:id', async (req, res) => {
   }
 });
 
-module.exports = router;
+export default router;
