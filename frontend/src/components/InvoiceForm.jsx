@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import styles from './InvoiceForm.module.css';
 
 export default function InvoiceForm({ onSaved, editing }) {
   const [form, setForm] = useState({ customer: '', items: [{ description: '', qty: 1, price: 0 }], dueDate: '' });
@@ -22,32 +23,28 @@ export default function InvoiceForm({ onSaved, editing }) {
   }
 
   return (
-    <form onSubmit={handleSubmit} className="p-4 border rounded">
-      <div>
-        <label>Customer</label>
-        <input value={form.customer} onChange={e => setForm({ ...form, customer: e.target.value })} required />
+    <form onSubmit={handleSubmit} className={styles.formContainer}>
+      <div className={styles.field}>
+        <label className={styles.label}>Customer</label>
+        <input className={styles.input} value={form.customer} onChange={e => setForm({ ...form, customer: e.target.value })} required />
       </div>
-      <div>
-        <label>Due date</label>
-        <input type="date" value={form.dueDate} onChange={e => setForm({ ...form, dueDate: e.target.value })} />
+      <div className={styles.field}>
+        <label className={styles.label}>Due date</label>
+        <input type="date" className={styles.dateInput} value={form.dueDate} onChange={e => setForm({ ...form, dueDate: e.target.value })} />
       </div>
 
-      <h4>Items</h4>
+      <div className={styles.itemsHeader}>Items</div>
       {form.items.map((it, idx) => (
-        <div key={idx} style={{display:'grid',gridTemplateColumns:'1fr 80px 100px 40px',gap:'8px',alignItems:'center'}}>
-          <input placeholder="description" value={it.description} onChange={e => updateItem(idx, 'description', e.target.value)} required />
-          <input type="number" min="1" value={it.qty} onChange={e => updateItem(idx, 'qty', Number(e.target.value))} />
-          <input type="number" min="0" step="0.01" value={it.price} onChange={e => updateItem(idx, 'price', Number(e.target.value))} />
-          <button type="button" onClick={() => removeItem(idx)}>✕</button>
+        <div key={idx} className={styles.itemRow}>
+          <input className={styles.itemInput} placeholder="description" value={it.description} onChange={e => updateItem(idx, 'description', e.target.value)} required />
+          <input className={styles.itemInput} type="number" min="1" value={it.qty} onChange={e => updateItem(idx, 'qty', Number(e.target.value))} />
+          <input className={styles.itemInput} type="number" min="0" step="0.01" value={it.price} onChange={e => updateItem(idx, 'price', Number(e.target.value))} />
+          <button type="button" className={styles.removeBtn} onClick={() => removeItem(idx)}>✕</button>
         </div>
       ))}
-      <div>
-        <button type="button" onClick={addItem}>Add item</button>
-      </div>
+      <button type="button" className={styles.addBtn} onClick={addItem}>Add item</button>
 
-      <div style={{marginTop:12}}>
-        <button type="submit">Save Invoice</button>
-      </div>
+      <button type="submit" className={styles.saveBtn}>Save Invoice</button>
     </form>
   );
 }
